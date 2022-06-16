@@ -1,6 +1,8 @@
 #include    "unpL.h"
 
-/* Read "n" bytes from a descriptor. */
+/* Try to read up to n bytes from a descriptor.
+ * Return bytes read actually.
+ */
 ssize_t readn(int fd, void *vptr, size_t n)
 {
 	size_t	nleft;
@@ -34,7 +36,9 @@ ssize_t Readn(int fd, void *ptr, size_t nbytes)
 	return(n);
 }
 
-/* Write "n" bytes to a descriptor. */
+/* Try to write up to "n" bytes to a descriptor. 
+ * Return bytes read actually.
+ */
 ssize_t writen(int fd, const void *vptr, size_t n)
 {
 	size_t		nleft;
@@ -94,6 +98,7 @@ again:
 
 /* Read a text line from a descriptor, one byte at a time.
  * Return > 1 for the number read, 0 for EOF, -1 for ERROR
+ * Notes: Used static private buffer.
  */
 ssize_t readline(int fd, void *vptr, size_t maxlen)
 {

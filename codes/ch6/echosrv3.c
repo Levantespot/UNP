@@ -1,5 +1,5 @@
 // Single process version using select()
-// Use Readline()
+// Use Readn()
 #include    "../lib/unpL.h"
 
 void str_echo(int sockfd);
@@ -73,12 +73,10 @@ int main(int argc, char **argv)
 
 void str_echo(int sockfd) {
     char buf[MAXLINE];
-    ssize_t n; // returned number by Readline()
+    ssize_t n; // returned number by Readn()
 
 again:
-    // while ((n = Readn(sockfd, buf, MAXLINE)) > 0) {
-    while ((n = Readline(sockfd, buf, MAXLINE)) > 0) {
-        // Writen(STDOUT_FILENO, buf, n); // check content
+    while ((n = Readn(sockfd, buf, MAXLINE)) > 0) {
         Fputs(buf, stdout);
         Writen(sockfd, buf, n);
     }

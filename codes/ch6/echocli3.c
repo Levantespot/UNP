@@ -1,3 +1,4 @@
+// Use Readn()
 #include    "../lib/unpL.h"
 
 void str_cli(FILE *fp, int sockfd);
@@ -35,7 +36,6 @@ void str_cli(FILE *fp, int sockfd) {
 
     FD_ZERO(&rset);
     for( ; ; ) {
-        // printf("need_read_from_stdio = %d\n", need_read_from_stdio);
         FD_SET(sockfd, &rset); // socket
         if (need_read_from_stdio) FD_SET(fileno(fp), &rset); // input
 
@@ -43,7 +43,7 @@ void str_cli(FILE *fp, int sockfd) {
         Select(maxfdp1, &rset, NULL, NULL, NULL);
 
         if (FD_ISSET(sockfd, &rset)) { // socket is readable
-            if ((n = Readline(sockfd, buf_recv, MAXLINE)) == 0) {
+            if ((n = Readn(sockfd, buf_recv, MAXLINE)) == 0) {
                 if (need_read_from_stdio == 0) return; // normal termination
                 else err_quit("str_cli: server terminated prematurely");
             }
@@ -51,8 +51,7 @@ void str_cli(FILE *fp, int sockfd) {
         }
 
         if (FD_ISSET(fileno(fp), &rset)) { // input is readable
-            // if ((n = Readn(fileno(fp), buf_send, MAXLINE)) == 0) {
-            if ((n = Readline(fileno(fp), buf_send, MAXLINE)) == 0) {
+            if ((n = Readn(fileno(fp), buf_send, MAXLINE)) == 0) {
                 // read EOF
                 need_read_from_stdio = 0; // no longer needs to read from stdio
                 Shutdown(sockfd, SHUT_WR); // no longer needs to write to socket
