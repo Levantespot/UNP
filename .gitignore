@@ -1,0 +1,11 @@
+unp/*
+.vscode/*
+
+# Object files
+*.o
+
+# Libraries
+*.a
+
+# Executables
+*.out
