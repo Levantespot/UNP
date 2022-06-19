@@ -86,6 +86,16 @@ void Listen(int fd, int backlog)
 }
 /* end Listen */
 
+int Poll(struct pollfd *fdarray, unsigned long nfds, int timeout)
+{
+	int		n;
+
+	if ( (n = poll(fdarray, nfds, timeout)) < 0)
+		err_sys("poll error");
+
+	return(n);
+}
+
 ssize_t Recv(int fd, void *ptr, size_t nbytes, int flags)
 {
 	ssize_t		n;

@@ -1,5 +1,5 @@
 /*
- * Standard I/O wrapper functions.
+ * Standard I/O wrapper functions in stdio.h
  */
 
 #include	"unpL.h"

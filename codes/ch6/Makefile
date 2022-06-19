@@ -5,7 +5,7 @@ CFLAGS = -g -O0 -Wall
 LIBS = ../lib/unpL.a
 LIBS_FLAG = -pthread
 
-PROGS = echocli echocli3 echosrv echosrv2 echosrv3
+PROGS = echocli echocli3 echocli_poll echosrv echosrv2 echosrv3 echosrv_poll
 
 .PHONY: all clean
 
@@ -17,6 +17,9 @@ echocli: echocli.c $(LIBS)
 echocli3: echocli3.c $(LIBS)
 	gcc $(CFLAGS) -o $@ $^ $(LIBS_FLAG)
 
+echocli_poll: echocli_poll.c $(LIBS)
+	gcc $(CFLAGS) -o $@ $^ $(LIBS_FLAG)
+
 echosrv: echosrv.c $(LIBS)
 	gcc $(CFLAGS) -o $@ $^ $(LIBS_FLAG)
 
@@ -25,6 +28,11 @@ echosrv2: echosrv2.c $(LIBS)
 
 echosrv3: echosrv3.c $(LIBS)
 	gcc $(CFLAGS) -o $@ $^ $(LIBS_FLAG)
+
+echosrv_poll: echosrv_poll.c $(LIBS)
+	gcc $(CFLAGS) -o $@ $^ $(LIBS_FLAG)
+
+
 
 clean:
 	-rm $(PROGS)

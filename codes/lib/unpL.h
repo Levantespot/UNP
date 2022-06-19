@@ -18,7 +18,8 @@
 #include    <sys/wait.h>
 #include    <signal.h>
 #include    <sys/select.h>
-// #include    <math.h>
+#include    <sys/poll.h>
+#include    <limits.h>
 
 #define	LISTENQ		1024	/* 2nd argument to listen() */
 #define SERVER_PORT 7123    /* used port */
@@ -43,6 +44,7 @@ void Getsockopt(int fd, int level, int optname, void *optval, socklen_t *optlenp
 const char *Inet_ntop(int family, const void *addrptr, char *strptr, size_t len);
 void Inet_pton(int family, const char *strptr, void *addrptr);
 void Listen(int fd, int backlog);
+int Poll(struct pollfd *fdarray, unsigned long nfds, int timeout);
 ssize_t Recv(int fd, void *ptr, size_t nbytes, int flags);
 ssize_t Recvfrom(int fd, void *ptr, size_t nbytes, int flags,
 		 struct sockaddr *sa, socklen_t *salenptr);
