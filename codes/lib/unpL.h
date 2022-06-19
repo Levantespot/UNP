@@ -20,6 +20,7 @@
 #include    <sys/select.h>
 #include    <sys/poll.h>
 #include    <limits.h>
+#include    <netdb.h>       /* getaddinfo, getnameinfo */
 
 #define	LISTENQ		1024	/* 2nd argument to listen() */
 #define SERVER_PORT 7123    /* used port */
@@ -59,8 +60,12 @@ void Setsockopt(int fd, int level, int optname, const void *optval, socklen_t op
 void Shutdown(int fd, int how);
 int Sockatmark(int fd);
 int Socket(int family, int type, int protocol);
+
+/* in basic_socket.c  */
 void Socketpair(int family, int type, int protocol, int *fd);
 char *sock_ntop(const struct sockaddr *sa, socklen_t salen);
+int Tcp_connect(const char *host, const char *serv);
+int Tcp_listen(const char *host, const char *serv, socklen_t *addrlen_ptr);
 
 
 /* in wrapunix.c  */

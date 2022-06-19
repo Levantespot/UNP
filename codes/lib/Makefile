@@ -2,7 +2,7 @@ CFLAGS = -g -O2 -Wall
 
 LIBS = -pthread
 
-OBJECTIVE_FILES = wrapsocket.o wrapunix.o error.o wrapio.o wrapstdio.o
+OBJECTIVE_FILES = wrapsocket.o wrapunix.o error.o wrapio.o wrapstdio.o basic_socket.o
 
 unpL.a: unpL.h $(OBJECTIVE_FILES);
 	ar rcs unpL.a $(OBJECTIVE_FILES)
@@ -20,6 +20,9 @@ wrapio.o: wrapio.c
 	gcc -c $(CFLAGS) -o $@ $^ $(LIBS)
 
 wrapstdio.o: wrapstdio.c
+	gcc -c $(CFLAGS) -o $@ $^ $(LIBS)
+
+basic_socket.o: basic_socket.c
 	gcc -c $(CFLAGS) -o $@ $^ $(LIBS)
 
 clean:
